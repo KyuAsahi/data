@@ -1,0 +1,79 @@
+version: "3.8"
+services:
+  shadowsocks_001:
+    image: shadowsocks/shadowsocks-libev
+    container_name: ss_myself
+    ports:
+      - 45101:8388
+    environment:
+      - TZ=Asia/Shanghai
+      - PASSWORD=${ss_myself_pw}
+      - METHOD=chacha20-ietf-poly1305
+    restart: always
+  shadowsocks_002:
+    image: shadowsocks/shadowsocks-libev
+    container_name: ss_jilin
+    ports:
+      - 45102:8388
+    environment:
+      - TZ=Asia/Shanghai
+      - PASSWORD=${ss_jilin_pw}
+      - METHOD=chacha20-ietf-poly1305
+    restart: always
+  shadowsocks_003:
+    image: shadowsocks/shadowsocks-libev
+    container_name: ss_liaopeng
+    ports:
+      - 45103:8388
+    environment:
+      - TZ=Asia/Shanghai
+      - PASSWORD=${ss_liaopeng_pw}
+      - METHOD=chacha20-ietf-poly1305
+    restart: always
+  shadowsocks_004:
+    image: shadowsocks/shadowsocks-libev
+    container_name: ss_redo
+    ports:
+      - 45104:8388
+    environment:
+      - TZ=Asia/Shanghai
+      - PASSWORD=${ss_redo_pw}
+      - METHOD=chacha20-ietf-poly1305
+    restart: always
+  shadowsocks_005:
+    image: shadowsocks/shadowsocks-libev
+    container_name: ss_jc
+    ports:
+      - 45105:8388
+    environment:
+      - TZ=Asia/Shanghai
+      - PASSWORD=${ss_jc_pw}
+      - METHOD=chacha20-ietf-poly1305
+    restart: always
+  shadowsocks_006:
+    image: shadowsocks/shadowsocks-libev
+    container_name: ss_sister
+    ports:
+      - 45106:8388
+    environment:
+      - TZ=Asia/Shanghai
+      - PASSWORD=${ss_sister_pw}
+      - METHOD=chacha20-ietf-poly1305
+    restart: always
+  shadowsocks_007:
+    image: shadowsocks/shadowsocks-libev
+    container_name: ss_kawaii
+    ports:
+      - 45107:8388
+    environment:
+      - TZ=Asia/Shanghai
+      - PASSWORD=${ss_kawaii_pw}
+      - METHOD=chacha20-ietf-poly1305
+    restart: always
+  kcptun:
+    image: xtaci/kcptun
+    container_name: kcptun
+    ports:
+      - 55101:29900/udp
+    command: server -t "ss_myself:8388" -l ":29900" --key "${kcptun_pw}" --crypt "aes" --datashard 10 --parityshard 3 --mtu 1350 --sndwnd 512 --rcvwnd 512 --dscp 0 --mode "fast"
+    restart: always

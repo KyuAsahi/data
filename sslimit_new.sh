@@ -7,6 +7,8 @@ max_link=5
 
 while [ ! ]
 do
+	echo "--------------------------------"
+	date
 	for container in $container_list
 	do
 		PID=`docker inspect -f '{{.State.Pid}}' $container`
@@ -14,8 +16,6 @@ do
 		link_num=`nsenter -t $PID -n netstat -anp|grep ESTABLISHED |grep 8388 |awk '{print $5}'|awk -F ':' '{print $1}'|sort|uniq|wc -l`
 		iptables -C DOCKER-USER -p tcp -d $Container_IP -j DROP
 		iptables_flag=`echo $?`
-		echo "--------------------------------"
-		date
 		echo "$container link num is $link_num"
 		if [ $link_num -gt $max_link ]
 		then

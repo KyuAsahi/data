@@ -15,7 +15,7 @@ do
 	PID=`docker inspect -f '{{.State.Pid}}' $container`
 	Container_IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $container`
 	link_num=`nsenter -t $PID -n netstat -anp|grep ESTABLISHED |grep 8388 |awk '{print $5}'|awk -F ':' '{print $1}'|sort|uniq|wc -l`
-	iptables -C DOCKER-USER -p tcp -d $Container_IP -j DROP > /dev/null
+	iptables -C DOCKER-USER -p tcp -d $Container_IP -j DROP > /dev/null 2>&1
 	iptables_flag=`echo $?`
 	echo "$container link num is $link_num"
 	if [ $link_num -gt $max_link ]

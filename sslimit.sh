@@ -10,6 +10,7 @@ container_list=`cat $ss_yml_path |grep container_name |grep -oP '(?<=:\s)ss_\w*'
 
 echo "--------------------------------"
 TZ="Asia/Shanghai" date
+echo ""
 for container in $container_list
 do
 	PID=`docker inspect -f '{{.State.Pid}}' $container`
@@ -31,4 +32,5 @@ do
 		fi
 	fi
 done
+echo ""
 iptables -L DOCKER-USER

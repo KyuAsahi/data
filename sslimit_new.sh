@@ -55,17 +55,20 @@ function Connection_control(){
 		then
 			if [ $iptables_flag -eq 1 ]
 			then
-			iptables -I DOCKER-USER -p tcp -d $Container_IP -j DROP
+				iptables -I DOCKER-USER -p tcp -d $Container_IP -j DROP
 			fi
 		else
 			if [ $iptables_flag -eq 0 ]
 			then
-			iptables -D DOCKER-USER -p tcp -d $Container_IP -j DROP
+				iptables -D DOCKER-USER -p tcp -d $Container_IP -j DROP
 			fi
 		fi
 		Traffic_statistics
 		echo "$container $link_num link , $total_sum_gb GB , $total_sum_mb MB , $total_sum_kb KB"
-		echo "$link_list"
+		if [ $link_num -ne 0 ]
+		then
+			echo "$link_list"
+		fi
 	done
 	
 }

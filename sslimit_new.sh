@@ -47,7 +47,8 @@ function Connection_control(){
 	do
 		PID=`docker inspect -f '{{.State.Pid}}' $container`
 		Container_IP=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $container`
-		link_num=`nsenter -t $PID -n netstat -anp|grep ESTABLISHED |grep 8388 |awk '{print $5}'|awk -F ':' '{print $1}'|sort|uniq|wc -l`
+		link_list=`nsenter -t $PID -n netstat -anp|grep ESTABLISHED |grep 8388 |awk '{print $5}'|awk -F ':' '{print $1}'|sort|uniq`
+		link_num=`echo "$link_list"|wc -l`
 		iptables -C DOCKER-USER -p tcp -d $Container_IP -j DROP > /dev/null 2>&1
 		iptables_flag=`echo $?`
 		if [ $link_num -gt $max_link ]
@@ -64,6 +65,7 @@ function Connection_control(){
 		fi
 		Traffic_statistics
 		echo "$container $link_num link , $total_sum_gb GB , $total_sum_mb MB , $total_sum_kb KB"
+		echo "$link_list"
 	done
 	
 }

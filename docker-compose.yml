@@ -11,6 +11,7 @@ services:
       - METHOD=chacha20-ietf-poly1305
     sysctls:
       net.ipv4.tcp_keepalive_time: ${keepalive_time}
+      net.netfilter.nf_conntrack_tcp_timeout_established: ${established_timeout}
     restart: always
   shadowsocks_002:
     image: shadowsocks/shadowsocks-libev
@@ -23,6 +24,7 @@ services:
       - METHOD=chacha20-ietf-poly1305
     sysctls:
       net.ipv4.tcp_keepalive_time: ${keepalive_time}
+      net.netfilter.nf_conntrack_tcp_timeout_established: ${established_timeout}
     restart: always
   shadowsocks_003:
     image: shadowsocks/shadowsocks-libev
@@ -35,6 +37,7 @@ services:
       - METHOD=chacha20-ietf-poly1305
     sysctls:
       net.ipv4.tcp_keepalive_time: ${keepalive_time}
+      net.netfilter.nf_conntrack_tcp_timeout_established: ${established_timeout}
     restart: always
   shadowsocks_004:
     image: shadowsocks/shadowsocks-libev
@@ -47,6 +50,7 @@ services:
       - METHOD=chacha20-ietf-poly1305
     sysctls:
       net.ipv4.tcp_keepalive_time: ${keepalive_time}
+      net.netfilter.nf_conntrack_tcp_timeout_established: ${established_timeout}
     restart: always
   shadowsocks_005:
     image: shadowsocks/shadowsocks-libev
@@ -59,6 +63,7 @@ services:
       - METHOD=chacha20-ietf-poly1305
     sysctls:
       net.ipv4.tcp_keepalive_time: ${keepalive_time}
+      net.netfilter.nf_conntrack_tcp_timeout_established: ${established_timeout}
     restart: always
   shadowsocks_006:
     image: shadowsocks/shadowsocks-libev
@@ -71,6 +76,7 @@ services:
       - METHOD=chacha20-ietf-poly1305
     sysctls:
       net.ipv4.tcp_keepalive_time: ${keepalive_time}
+      net.netfilter.nf_conntrack_tcp_timeout_established: ${established_timeout}
     restart: always
   shadowsocks_007:
     image: shadowsocks/shadowsocks-libev
@@ -83,6 +89,7 @@ services:
       - METHOD=chacha20-ietf-poly1305
     sysctls:
       net.ipv4.tcp_keepalive_time: ${keepalive_time}
+      net.netfilter.nf_conntrack_tcp_timeout_established: ${established_timeout}
     restart: always
   kcptun:
     image: xtaci/kcptun

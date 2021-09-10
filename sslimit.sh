@@ -5,6 +5,7 @@ max_link=5
 script_path=`realpath $0`
 script_dir=`dirname $script_path`
 month_now=`TZ="Asia/Shanghai" date +%Y-%m`
+time_now=`TZ="Asia/Shanghai" date '+%Y-%m-%d %H:%M'`
 traffic_dir="$script_dir/traffic"
 traffic_date_dir="$traffic_dir/$month_now"
 ss_yml_path="$script_dir/docker-compose.yml"
@@ -64,7 +65,7 @@ function Connection_control(){
 			fi
 		fi
 		Traffic_statistics
-		echo "$container $link_num link , $total_sum_gb GB , $total_sum_mb MB , $total_sum_kb KB"
+		echo "[$time_now] $container $link_num link , $total_sum_gb GB , $total_sum_mb MB , $total_sum_kb KB"
 		if [ $link_num -ne 0 ]
 		then
 			echo "$link_list"
